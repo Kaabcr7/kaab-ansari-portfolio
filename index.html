@@ -101,12 +101,13 @@
                     </div>
                     <div>
                         <h3 class="text-xl font-semibold mb-4 flex items-center gap-2">
-                            <span class="text-sky-600">🛠️</span> Programming & Coursework
+                            <span class="text-sky-600">🛠️</span> Programming, Tools & Coursework
                         </h3>
                         <ul class="space-y-2 text-slate-600">
                            <li class="p-3 bg-slate-50 rounded-lg"><strong>Object-Oriented Programming:</strong> Java OOP.</li>
+                           <li class="p-3 bg-slate-50 rounded-lg"><strong>Data Tools:</strong> Familiar with Excel and Google Sheets; experienced with Excel data processing using Pandas in Python.</li>
                            <li class="p-3 bg-slate-50 rounded-lg"><strong>Coursework:</strong> Machine Learning Specialization (Andrew Ng - Coursera), CS50 Python (Harvard), Data Science and Machine Learning (CodeWithHarry).</li>
-                           <li class="p-3 bg-slate-50 rounded-lg"><strong>Tools & Platforms:</strong> VS Code, Jupyter Notebook.</li>
+                           <li class="p-3 bg-slate-50 rounded-lg"><strong>Development Tools:</strong> VS Code, Jupyter Notebook.</li>
                         </ul>
                     </div>
                 </div>
@@ -330,75 +331,4 @@
                 modalContent.classList.remove('scale-100', 'opacity-100');
                 setTimeout(() => {
                     modal.classList.add('hidden');
-                    modal.classList.remove('flex');
-                }, 200);
-            }
-
-            closeModalBtn.addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-
-            summarizeBtn.addEventListener('click', async () => {
-                summarySection.classList.remove('hidden');
-                llmSummary.textContent = '';
-                summaryLoading.classList.remove('hidden');
-
-                const prompt = `Summarize the following project description in 3-4 concise bullet points, focusing on the key outcomes and technologies used. Project Description: ${currentProjectDescription}`;
-                let chatHistory = [];
-                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-                const payload = { contents: chatHistory };
-                const apiKey = "";
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    const result = await response.json();
-                    if (result.candidates && result.candidates.length > 0 &&
-                        result.candidates[0].content && result.candidates[0].content.parts &&
-                        result.candidates[0].content.parts.length > 0) {
-                        const text = result.candidates[0].content.parts[0].text;
-                        llmSummary.textContent = text;
-                    } else {
-                        llmSummary.textContent = 'Failed to generate summary. Please try again.';
-                    }
-                } catch (error) {
-                    console.error('Error calling Gemini API:', error);
-                    llmSummary.textContent = 'Error generating summary. Please check console for details.';
-                } finally {
-                    summaryLoading.classList.add('hidden');
-                }
-            });
-
-            const sections = document.querySelectorAll('main section');
-            const navLinks = document.querySelectorAll('header .nav-link');
-
-            function onScroll() {
-                let currentSection = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (pageYOffset >= sectionTop - 100) {
-                        currentSection = section.getAttribute('id');
-                    }
-                });
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${currentSection}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-
-            window.addEventListener('scroll', onScroll);
-            onScroll();
-        });
-    </script>
-</body>
-</html>
+           

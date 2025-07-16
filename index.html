@@ -8,7 +8,397 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-…            onScroll();
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony (Light neutrals with a muted sky blue accent) -->
+    <!-- Application Structure Plan: A single-page portfolio with top navigation for smooth scrolling. The structure is thematic (About, Skills, Projects, Education) to allow non-linear exploration by recruiters. This is more engaging than a static resume, with key interactive elements being a visual skills chart and clickable project cards that reveal details, focusing user attention and encouraging deeper dives into key qualifications. -->
+    <!-- Visualization & Content Choices: 
+    - Summary -> Inform -> Hero text -> Static -> Clear opening statement.
+    - Skills -> Compare -> Horizontal Bar Chart (Chart.js) -> Hover tooltips -> Provides a quick, scannable visual of technical proficiency.
+    - Projects -> Organize/Inform -> Card grid with modals -> Click to reveal details -> Prevents information overload, encourages interaction, and focuses on one project at a time.
+    - Education/Certs -> Inform -> Two-column text layout -> Static -> Clean, standard presentation for factual data.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 450px;
+            }
+        }
+        .nav-link.active {
+            color: #0284c7; /* sky-600 */
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <header id="header" class="bg-slate-50/80 backdrop-blur-sm sticky top-0 z-40">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-bold text-xl text-slate-900">Kaab Ansari</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#about" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-sky-600 transition-colors">About</a>
+                        <a href="#skills" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-sky-600 transition-colors">Skills</a>
+                        <a href="#projects" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-sky-600 transition-colors">Projects</a>
+                        <a href="#education" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-sky-600 transition-colors">Education</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <section id="about" class="py-20 md:py-28 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-slate-900 mb-4">Aspiring Machine Learning Engineer</h1>
+                <p class="text-lg md:text-xl text-slate-600 leading-relaxed">
+                    Highly motivated and detail-oriented Computer Engineering student with a strong foundation in Machine Learning, Data Science, and object-oriented programming. Proficient in Python, Java, and C, with practical experience in building predictive models and handling data for complex pipelines. Eager to apply analytical and technical skills in a challenging remote or hybrid internship role.
+                </p>
+                <div class="mt-8 flex justify-center gap-4">
+                    <a href="mailto:kaab73a@gmail.com" class="bg-sky-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-sky-700 transition-all">Email Me</a>
+                    <a href="https://github.com/Kaabcr7?tab=repositories" class="bg-slate-200 text-slate-800 font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-slate-300 transition-all" target="_blank" rel="noopener noreferrer">View GitHub</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-20 bg-white rounded-2xl shadow-sm">
+            <div class="max-w-4xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-4 text-slate-900">Technical Skills</h2>
+                <p class="text-center text-slate-600 mb-12">
+                    This section provides a visual overview of my technical capabilities. The chart illustrates my proficiency across different programming languages, and the lists below detail my knowledge in specific domains like Machine Learning and Data Science.
+                </p>
+
+                <div class="chart-container mb-16">
+                    <canvas id="skillsChart" class="block w-full h-full"></canvas>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                            <span class="text-sky-600">🧠</span> Machine Learning & Data Science
+                        </h3>
+                        <ul class="space-y-2 text-slate-600">
+                            <li class="p-3 bg-slate-50 rounded-lg"><strong>Concepts:</strong> Machine Learning, Data Preprocessing, Feature Engineering, Model Evaluation, Data Structuring & Filtering.</li>
+                            <li class="p-3 bg-slate-50 rounded-lg"><strong>Libraries:</strong> NumPy, Pandas, Matplotlib.</li>
+                            <li class="p-3 bg-slate-50 rounded-lg"><strong>Currently Studying:</strong> Deep Learning.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                            <span class="text-sky-600">🛠️</span> Programming, Tools & Coursework
+                        </h3>
+                        <ul class="space-y-2 text-slate-600">
+                           <li class="p-3 bg-slate-50 rounded-lg"><strong>Object-Oriented Programming:</strong> Java OOP.</li>
+                           <li class="p-3 bg-slate-50 rounded-lg"><strong>Data Tools:</strong> Familiar with Excel and Google Sheets; experienced with Excel data processing using Pandas in Python.</li>
+                           <li class="p-3 bg-slate-50 rounded-lg"><strong>Coursework:</strong> Machine Learning Specialization (Andrew Ng - Coursera), CS50 Python (Harvard), Data Science and Machine Learning (CodeWithHarry).</li>
+                           <li class="p-3 bg-slate-50 rounded-lg"><strong>Development Tools:</strong> VS Code, Jupyter Notebook.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20">
+            <div class="max-w-5xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-4 text-slate-900">Projects</h2>
+                <p class="text-center text-slate-600 mb-12 max-w-3xl mx-auto">
+                    Here are some of the machine learning projects I have built. Each project demonstrates my ability to work through the entire data science pipeline, from data cleaning and exploration to model building and evaluation. Click on a project to see more details.
+                </p>
+                <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="py-20 bg-white rounded-2xl shadow-sm">
+            <div class="max-w-4xl mx-auto px-4">
+                 <h2 class="text-3xl font-bold text-center mb-12 text-slate-900">Education & Coursework</h2>
+                 <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 flex items-center gap-3">
+                            <span class="text-2xl">🎓</span> Education
+                        </h3>
+                        <div class="border-l-2 border-sky-200 pl-6">
+                            <p class="font-bold text-slate-800">Vidyalankar Institute of Technology</p>
+                            <p class="text-slate-600">B.Tech in Computer Engineering</p>
+                            <p class="text-sm text-slate-500">Currently in Second Year, Third Semester</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 flex items-center gap-3">
+                           <span class="text-2xl">📚</span> Key Coursework
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="border-l-2 border-sky-200 pl-6">
+                                <p class="font-bold text-slate-800">Machine Learning Specialization</p>
+                                <p class="text-slate-600">Coursera (by Andrew Ng)</p>
+                            </div>
+                            <div class="border-l-2 border-sky-200 pl-6">
+                                <p class="font-bold text-slate-800">CS50 Python</p>
+                                <p class="text-slate-600">Harvard University</p>
+                            </div>
+                             <div class="border-l-2 border-sky-200 pl-6">
+                                <p class="font-bold text-slate-800">Data Science and Machine Learning Course</p>
+                                <p class="text-slate-600">CodeWithHarry</p>
+                            </div>
+                            <div class="border-l-2 border-sky-200 pl-6">
+                                <p class="font-bold text-slate-800">Java Object-Oriented Programming</p>
+                                <p class="text-slate-600">NPTEL</p>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-slate-100 mt-20">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-slate-600">Kaab Ansari</p>
+            <div class="mt-2 flex justify-center space-x-6">
+                <a href="mailto:kaab73a@gmail.com" class="text-slate-500 hover:text-sky-600">Email</a>
+                <a href="https://github.com/Kaabcr7?tab=repositories" class="text-slate-500 hover:text-sky-600" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+            <p class="mt-4 text-sm text-slate-500">&copy; 2025 Kaab Ansari. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="project-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4">
+        <div id="modal-content" class="bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform transition-all scale-95 opacity-0">
+            <div class="p-6 md:p-8">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 id="modal-title" class="text-2xl font-bold text-slate-900"></h3>
+                    <button id="close-modal" class="text-slate-500 hover:text-slate-800">&times;</button>
+                </div>
+                <div id="modal-body" class="text-slate-600 space-y-4"></div>
+                <div id="summary-section" class="mt-4 p-4 bg-slate-50 rounded-lg border border-slate-200 hidden">
+                    <h4 class="font-semibold text-slate-800 mb-2">✨ Quick Summary</h4>
+                    <p id="llm-summary" class="text-slate-700 text-sm"></p>
+                    <div id="summary-loading" class="hidden text-center text-slate-500 text-sm mt-2">Generating summary...</div>
+                </div>
+                <div class="mt-6 flex flex-col sm:flex-row gap-4">
+                    <button id="summarize-btn" class="bg-sky-600 text-white font-semibold px-5 py-2 rounded-lg shadow-md hover:bg-sky-700 transition-all">Summarize Project ✨</button>
+                    <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-block bg-slate-200 text-slate-800 text-center font-semibold px-5 py-2 rounded-lg shadow-md hover:bg-slate-300 transition-all">View on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const skillsData = {
+                labels: ['Python', 'Java', 'C', 'JavaScript', 'HTML', 'CSS'],
+                datasets: [{
+                    label: 'Proficiency',
+                    data: [90, 85, 80, 60, 70, 70],
+                    backgroundColor: 'rgba(56, 189, 248, 0.6)',
+                    borderColor: 'rgba(2, 132, 199, 1)',
+                    borderWidth: 2,
+                    borderRadius: 4,
+                    barPercentage: 0.6,
+                }]
+            };
+
+            const skillsChartCtx = document.getElementById('skillsChart').getContext('2d');
+            new Chart(skillsChartCtx, {
+                type: 'bar',
+                data: skillsData,
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    if (value >= 80) return 'Proficient';
+                                    if (value >= 60) return 'Familiar';
+                                    return 'Basic';
+                                }
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                font: {
+                                    size: 14,
+                                    weight: '500'
+                                },
+                                color: '#334155'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: false
+                        }
+                    }
+                }
+            });
+
+            const projects = [
+                {
+                    title: 'House Price Predictor',
+                    description: [
+                        'Developed a machine learning model to predict house prices based on various features.',
+                        'The process involved extensive data cleaning to handle missing values and outliers, feature selection using correlation analysis, and engineering new features to improve model performance.',
+                        'Trained and evaluated multiple regression models, selecting the best performer for final predictions.'
+                    ],
+                    link: 'https://github.com/Kaabcr7/DragonRealEstate-Price-Predictor'
+                },
+                {
+                    title: 'Titanic Survival Predictor',
+                    description: [
+                        'Implemented a classification model to predict passenger survival on the Titanic.',
+                        'This project focused on robust data preprocessing techniques, including imputing missing data for age and cabin, and encoding categorical variables like gender and port of embarkation using one-hot encoding.',
+                        'Optimized model hyperparameters to achieve high accuracy in predicting survival outcomes.'
+                    ],
+                    link: 'https://github.com/Kaabcr7/Titanic-Survival-Predictor'
+                },
+                {
+                    title: 'Handwritten Digit Recognition',
+                    description: [
+                        'Created a neural network model for recognizing handwritten digits from the MNIST dataset.',
+                        'This project demonstrates an understanding of image data processing, including normalizing pixel values, and building a multi-class classification model.',
+                        'Achieved a high accuracy rate, showcasing the effectiveness of the model in a classic computer vision task.'
+                    ],
+                    link: '#' // Placeholder for future link
+                }
+            ];
+
+            const projectsGrid = document.getElementById('projects-grid');
+            projects.forEach((project, index) => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer';
+                card.innerHTML = `
+                    <h3 class="font-bold text-xl mb-2 text-slate-800">${project.title}</h3>
+                    <p class="text-slate-600 text-sm">${project.description[0]}</p>
+                `;
+                card.addEventListener('click', () => openModal(project));
+                projectsGrid.appendChild(card);
+            });
+
+            const modal = document.getElementById('project-modal');
+            const modalContent = document.getElementById('modal-content');
+            const closeModalBtn = document.getElementById('close-modal');
+            const summarizeBtn = document.getElementById('summarize-btn');
+            const summarySection = document.getElementById('summary-section');
+            const llmSummary = document.getElementById('llm-summary');
+            const summaryLoading = document.getElementById('summary-loading');
+            let currentProjectDescription = '';
+
+            function openModal(project) {
+                document.getElementById('modal-title').textContent = project.title;
+                const modalBody = document.getElementById('modal-body');
+                modalBody.innerHTML = project.description.map(p => `<p>${p}</p>`).join('');
+                document.getElementById('modal-link').href = project.link;
+                
+                currentProjectDescription = project.description.join(' '); // Store for LLM call
+                llmSummary.textContent = ''; // Clear previous summary
+                summarySection.classList.add('hidden'); // Hide summary section initially
+                summaryLoading.classList.add('hidden'); // Hide loading indicator
+
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => {
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            }
+            
+            function closeModal() {
+                modalContent.classList.add('scale-95', 'opacity-0');
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 200);
+            }
+
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            summarizeBtn.addEventListener('click', async () => {
+                summarySection.classList.remove('hidden');
+                llmSummary.textContent = '';
+                summaryLoading.classList.remove('hidden');
+
+                const prompt = `Summarize the following project description in 3-4 concise bullet points, focusing on the key outcomes and technologies used. Project Description: ${currentProjectDescription}`;
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await response.json();
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        llmSummary.textContent = text;
+                    } else {
+                        llmSummary.textContent = 'Failed to generate summary. Please try again.';
+                    }
+                } catch (error) {
+                    console.error('Error calling Gemini API:', error);
+                    llmSummary.textContent = 'Error generating summary. Please check console for details.';
+                } finally {
+                    summaryLoading.classList.add('hidden');
+                }
+            });
+
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('header .nav-link');
+
+            function onScroll() {
+                let currentSection = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 100) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', onScroll);
+            onScroll();
         });
     </script>
 </body>
